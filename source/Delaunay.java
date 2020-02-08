@@ -4,6 +4,7 @@ import quickhull3d.QuickHull3D;
 
 public class Delaunay {
 
+	int[][] faces;
 	float[][] edges;
 	LinkedArray mesh;
 	int[][] links;
@@ -41,7 +42,7 @@ public class Delaunay {
 
 		// prepare quickhull
 		QuickHull3D quickHull = new QuickHull3D(qPoints);
-		int[][] faces = quickHull.getFaces(QuickHull3D.POINT_RELATIVE + QuickHull3D.CLOCKWISE);
+		faces = quickHull.getFaces(QuickHull3D.POINT_RELATIVE + QuickHull3D.CLOCKWISE);
 
 		// turn faces into links
 		mesh = new LinkedArray(points.length+3);
@@ -74,6 +75,10 @@ public class Delaunay {
 			edges[i][3] = points[links[i][1]][1];
 		}
 
+	}
+
+	public int[][] getFaces() {
+		return this.faces;
 	}
 
 	public float[][] getEdges(){
